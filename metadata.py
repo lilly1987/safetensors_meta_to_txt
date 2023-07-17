@@ -29,10 +29,11 @@ try:
             i=int.from_bytes(bytes, byteorder='little')
             #print(i)
             bytes=f.read(i)
-            #text=bytes.decode('utf-8')
-            text=str(bytes, 'utf-8')
+            text=bytes.decode('utf-8')
+            #text=str(bytes, 'utf-8')
             #print(text)
-            d=ast.literal_eval(text)
+            d=json.loads(text)
+            #d=ast.literal_eval(text)
             #print(d)
             #print(type(d))
             #print(type(d["__metadata__"]))
@@ -44,11 +45,19 @@ try:
             text2=d["__metadata__"]
             #text2=d["__metadata__"]["ss_tag_frequency"]
             #print(type(text2))
+            #for v in text2:
+            #    #print(text2[v])
+            #    #print(v)
+            #    #text2[v]=json.loads(text2[v])
+            #    try:
+            #        text2[v]=ast.literal_eval(text2[v])
+            #    except Exception:
+            #        pass
             #text2=ast.literal_eval(text2)
             #text2=json.dumps(text2)
             #text2=json.loads(text2)
-            #print(text2)
             #print(type(text2))
+            #print(text2)
             #nm=os.path.splitext(fn)[0]
             #print(nm)
             with open(fn+".txt", 'w', encoding='utf-8') as fp:
