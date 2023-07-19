@@ -2,6 +2,9 @@ import os, sys, glob, json, random, time, copy, string, re, ast
 import json5 as json
 import base64
 
+import subprocess
+import pkg_resources
+
 required  = {'json5'}
 installed = {pkg.key for pkg in pkg_resources.working_set}
 missing   = required - installed
@@ -61,6 +64,9 @@ try:
             if "ss_tag_frequency" in d2 :
                 print("ss_tag_frequency")
                 d2["ss_tag_frequency"]=json.loads(d2["ss_tag_frequency"])
+            if "ss_datasets" in d2 :
+                print("ss_datasets")
+                d2["ss_datasets"]=json.loads(d2["ss_datasets"])
             #text2=d["__metadata__"]["ss_tag_frequency"]
             #print(type(text2))
             #for v in text2:
