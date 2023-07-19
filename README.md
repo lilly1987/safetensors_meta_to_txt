@@ -1,5 +1,9 @@
 # meta in safetensors to txt file
 
+## need python 3.x
+
+https://www.python.org/downloads/
+
 ## how to use
 ![2023-07-17 11 36 57](https://github.com/lilly1987/safetensors_meta_to_txt/assets/20321215/81a43bbc-039b-4fb0-b688-440293184c2b)
 
