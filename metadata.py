@@ -1,5 +1,6 @@
 import os, sys, glob, json, random, time, copy, string, re, ast
 import json5 as json
+import base64
 
 print("os.getcwd() : "+os.getcwd())
 print("__file__ : "+__file__)
@@ -42,7 +43,16 @@ try:
                     print(f"{fn} [yellow]txt no[/yellow]")
                     continue
                 
-            text2=d["__metadata__"]
+            d2=d["__metadata__"]
+            if "ssmd_cover_images" in d2 :
+                print("ssmd_cover_images")
+                imgstring=d2.pop("ssmd_cover_images",None)
+                imgdata = base64.b64decode(imgstring)
+                with open(fn+".png", 'wb') as fi:
+                    fi.write(imgdata)
+            if "ss_tag_frequency" in d2 :
+                print("ss_tag_frequency")
+                d2["ss_tag_frequency"]=json.loads(d2["ss_tag_frequency"])
             #text2=d["__metadata__"]["ss_tag_frequency"]
             #print(type(text2))
             #for v in text2:
@@ -61,7 +71,7 @@ try:
             #nm=os.path.splitext(fn)[0]
             #print(nm)
             with open(fn+".txt", 'w', encoding='utf-8') as fp:
-                json.dump(text2, fp, sort_keys=False, indent=4)
+                json.dump(d2, fp, sort_keys=False, indent=4)
             print(f"{fn} [green]txt make[/green]")
 
 except Exception:
