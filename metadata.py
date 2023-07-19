@@ -2,18 +2,26 @@ import os, sys, glob, json, random, time, copy, string, re, ast
 import json5 as json
 import base64
 
-print("os.getcwd() : "+os.getcwd())
-print("__file__ : "+__file__)
-print("os.path.dirname(__file__) : "+os.path.dirname(__file__))
-os.chdir(os.path.dirname(__file__))
-print(__name__)
+required  = {'json5'}
+installed = {pkg.key for pkg in pkg_resources.working_set}
+missing   = required - installed
+
+if missing:
+    python = sys.executable
+    subprocess.check_call([python, '-m', 'pip', 'install', *missing], stdout=subprocess.DEVNULL)
+    
+#print("os.getcwd() : "+os.getcwd())
+#print("__file__ : "+__file__)
+#print("os.path.dirname(__file__) : "+os.path.dirname(__file__))
+#os.chdir(os.path.dirname(__file__))
+#print(__name__)
 
 from ConsoleColor import print, console
     
 try:
     fullpaths=[]
     for v in range(1, len(sys.argv)):
-        print(sys.argv[v])
+        #print("[cyan]args[/cyan] : ",sys.argv[v])
         if os.path.isdir(sys.argv[v]):
             fullpaths+=glob.glob(sys.argv[v]+"\\*.safetensors", recursive=True)
         else:
@@ -23,7 +31,7 @@ try:
         if os.path.isfile(fn+".txt"):
             print(f"{fn} [cyan]txt exist[/cyan]")
             continue
-        #print(fn)
+        print(f"{fn} [green]run[/green]")
         with open(fn, 'rb') as f:
             bytes = f.read(8)
             #print(bytes)
