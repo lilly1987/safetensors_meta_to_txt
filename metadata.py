@@ -1,7 +1,7 @@
 import os, sys, glob, json, random, time, copy, string, re, ast
 import json5 as json
 import base64
-
+sys.path.append(os.getcwd())
 import subprocess
 import pkg_resources
 
